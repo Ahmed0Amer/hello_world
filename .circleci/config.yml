@@ -1,0 +1,28 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  welcome: circleci/welcome-orb@0.4.1
+jobs:
+  printhello:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run : echo hello
+  printworld:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo world
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  welcome:
+    jobs:
+      - welcome/run
+      - printhello
+      - printworld
