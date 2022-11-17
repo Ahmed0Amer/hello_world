@@ -25,4 +25,7 @@ workflows:
     jobs:
       - welcome/run
       - printhello
-      - printworld
+      - printworld:
+          requires:
+            - printhello
+
